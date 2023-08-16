@@ -20,7 +20,8 @@ spec:
     metadata:
       name: "{{ release_name }}"
       namespace: "{{ namespace }}"
-      labels: "{{ release_name }}"
+      labels: 
+        name: "{{ release_name }}"
     spec:
       project: default
       sources:
