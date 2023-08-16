@@ -18,28 +18,28 @@ spec:
             url: https://kubernetes.default.svc
   template:
     metadata:
-      name: "{{ release_name }}"
-      namespace: "{{ namespace }}"
+      name: {{ release_name }}
+      namespace: {{ namespace }}
       labels: 
-        name: "{{ release_name }}"
+        name: {{ release_name }}
     spec:
       project: default
       sources:
-      - repoURL: "{{ helm_repo_url }}"
-        chart: "{{ chart_name }}"
-        targetRevision: "{{ chart_version }}"
+      - repoURL: {{ helm_repo_url }}
+        chart: {{ chart_name }}
+        targetRevision: {{ chart_version }}
         helm:
           valueFiles: 
           - $values/{{ helm_value_file }}
           values: |
             {{ helm_custom_values }}
-      - repoURL: "{{ value_file_repo }}"
-        targetRevision: "{{ target_branch_values }}"
+      - repoURL: {{ value_file_repo }}
+        targetRevision: {{ target_branch_values }}
         ref: values
 
       destination:
-        server: "{{ url }}"
-        namespace: "{{ namespace }}"
+        server: {{ url }}
+        namespace: {{ namespace }}
       
       syncPolicy:
         automated: 
