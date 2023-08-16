@@ -30,9 +30,9 @@ spec:
         targetRevision: "{{ chart_version }}"
         helm:
           valueFiles: 
-          - $values/"{{ helm_value_file }}"
+          - $values/{{ helm_value_file }}
           values: |
-            "{{ helm_custom_values }}"
+            {{ helm_custom_values }}
       - repoURL: "{{ value_file_repo }}"
         targetRevision: "{{ target_branch_values }}"
         ref: values
