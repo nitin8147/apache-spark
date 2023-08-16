@@ -6,6 +6,6 @@ release_name: apache-spark-operator
 chart_version: 1.1.27
 
 value_file_repo: https://github.com/nitin8147/apache-spark.git
-helm_value_file: "argocd/values-files/apache-spark-values.yaml"
+helm_value_file: argocd/values-files/apache-spark-values.yaml
 helm_custom_values: ""
 target_branch_values: HEAD
