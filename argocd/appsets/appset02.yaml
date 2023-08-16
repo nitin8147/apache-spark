@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-01
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+      - list:
+          elements:
+          - cluster: kind-kind
+            url: https://kubernetes.default.svc
+  template:
+    metadata:
+      name: "deploy-spark-manifests"
+      namespace: "spark-operator"
+      labels: 
+        apps: "spark-operator-mainfest"
+        env: "demo"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/nitin8147/apache-spark.git
+        targetRevision: HEAD
+        path: argocd/manifests
+      destination:
+        server: "{{ url }}"
+      
+      syncPolicy:
+        automated: 
+          selfHeal: true
+        syncOptions:
+        - ApplyOutofSyncOnly=true
+
+      
+      ignoreDifferences:
+      - group: apps
+        kind: Deployment
+        jsonPointers:
+        - /spec/replicas
